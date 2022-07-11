@@ -1,7 +1,7 @@
 #import <UIKit/UIKit.h>
 
-%group 11up
-//iOS11-13
+%group OS11
+// iOS 11 - 13
 %hook FBApplicationTrustData
 - (unsigned long long)trustStateWithTrustRequiredReasons:(unsigned long long*)arg1 {
 	return 2;
@@ -18,8 +18,8 @@
 
 %end
 
-%group 14up
-//iOS14
+%group OS14
+// iOS 14 or above
 %hook FBSSignatureValidationService
 - (unsigned long long)trustStateForApplication:(id)arg1 {
     return 8;
@@ -39,8 +39,8 @@
 
 %ctor {
     if (@available(iOS 14.0, *)) {
-    %init(14up);
+    %init(OS14);
     } else {
-    %init(11up);
+    %init(OS11);
   }
 }
